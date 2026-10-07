@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cutting Data</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#101827">
+</head>
+
+<body>
+
+    
+    <div class="tool-buttons">
+        <button id="endMillBtn">End Mill</button>
+        <button id="drillBtn">Drill</button>
+    </div>
+
+    
+<div id="calculator" class="hidden">
+
+    <h2>Tool Diameter (mm)</h2>
+
+    <input type="number" id="diameter"
+           placeholder="Enter diameter"
+           min="0.1" step="0.1">
+
+
+    <div id="flutesGroup">
+
+    <h2>Number of Flutes</h2>
+
+        <select id="flutes">
+            <option value="2">2 Flutes</option>
+            <option value="3">3 Flutes</option>
+            <option value="4" selected>4 Flutes</option>
+            <option value="5">5 Flutes</option>
+            <option value="6">6 Flutes</option>
+        </select>
+
+    </div>
+
+    <h2>Workpiece Material</h2>
+
+    <select id="material">
+        <option value="steel">Steel</option>
+        <option value="stainless304">Stainless Steel 304</option>
+        <option value="stainless316">Stainless Steel 316</option>
+        <option value="stainless329">Stainless Steel 329</option>
+        <option value="stainlessUnknown">Stainless Steel - Unknown</option>
+        <option value="aluminum">Aluminum</option>
+    </select>
+
+    <h2>Machine Max RPM</h2>
+    <input
+    type="number"
+    id="maxRpm"
+    value="8000"
+    min="100"
+    step="100"
+>
+    
+
+    
+<div id="result" class="hidden">
+
+    <h2>Recommended Starting Values</h2>
+
+    <div class="result-grid">
+
+        
+
+        <div class="result-card">
+            <span class="result-label">SPINDLE SPEED</span>
+            <span id="rpmResult" class="result-value">0</span>
+            <span class="result-unit">RPM</span>
+
+        <div id="rpmLimitWarning" class="rpm-warning hidden"></div>
+    </div>
+
+        <div class="result-card">
+            <span class="result-label">FEED RATE</span>
+            <span id="feedResult" class="result-value">0</span>
+            <span class="result-unit">mm/min</span>
+        </div>
+
+    </div>
+
+    <div class="result-details">
+        <p>Cutting speed (Vc): <span id="vcResult"></span></p>
+        <p>
+            <span id="feedDataLabel">Feed per tooth (fz):</span>
+            <span id="fzResult"></span>
+        </p>
+    </div>
+
+    <p class="disclaimer">
+        General-purpose starting values. Adjust for tool, setup and cutting conditions.
+    </p>
+
+    </div>
+
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+            navigator.serviceWorker.register("./service-worker.js");
+        });
+    }
+</script>
+
+</body>
+</html>
